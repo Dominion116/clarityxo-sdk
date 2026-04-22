@@ -1,4 +1,4 @@
-import { callReadOnlyFunction } from '@stacks/transactions';
+import { callReadOnlyFunction, uintCV } from '@stacks/transactions';
 import type { ClarityXOConfig, Board, GameStatus, GameState, Turn } from '../types';
 import { CONTRACT_NAME, CONTRACT_FUNCTIONS } from '../constants';
 import { getStacksNetwork } from '../utils/network';
@@ -60,7 +60,11 @@ export async function getCurrentTurn(config: ClarityXOConfig): Promise<Turn> {
   return parseTurnCV(cv);
 }
 
-export async function isValidMove(config: ClarityXOConfig, row: 0 | 1 | 2, col: 0 | 1 | 2): Promise<boolean> {
+export async function isValidMove(
+  config: ClarityXOConfig,
+  row: 0 | 1 | 2,
+  col: 0 | 1 | 2
+): Promise<boolean> {
   const network = getStacksNetwork(config.network);
   const contractName = config.contractName || CONTRACT_NAME;
   const cv = await callReadOnlyFunction({
@@ -68,11 +72,7 @@ export async function isValidMove(config: ClarityXOConfig, row: 0 | 1 | 2, col: 
     contractAddress: config.contractAddress,
     contractName,
     functionName: CONTRACT_FUNCTIONS.IS_VALID_MOVE,
-    functionArgs: [
-      // Need to pass row and col as Clarity values
-      { type: 'uint', value: row },
-      { type: 'uint', value: col },
-    ],
+    functionArgs: [uintCV(row), uintCV(col)],
     senderAddress: config.contractAddress,
   });
   return (cv as any).value; // boolean value
