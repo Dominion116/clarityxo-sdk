@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { readFileSync } from 'fs';
+import { createRequire } from 'node:module';
 import boardCommand from './commands/board';
 import statusCommand from './commands/status';
 import winnerCommand from './commands/winner';
 import leaderboardCommand from './commands/leaderboard';
 
-const packageJson = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
+const require = createRequire(import.meta.url);
+const packageJson = require('../../package.json');
 
 const program = new Command();
 
