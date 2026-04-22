@@ -1,0 +1,50 @@
+{
+  "name": "clarityxo-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK and CLI for the ClarityXO on-chain Tic-Tac-Toe game on Stacks",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "clarityxo": "dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src"
+  },
+  "keywords": [
+    "stacks",
+    "clarity",
+    "blockchain",
+    "tictactoe",
+    "sdk",
+    "web3"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@stacks/blockchain-api-client": "^7.x",
+    "@stacks/network": "^6.x",
+    "@stacks/transactions": "^6.x",
+    "chalk": "^5.x",
+    "commander": "^12.x",
+    "ora": "^8.x"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "eslint": "^8.x",
+    "prettier": "^3.x",
+    "tsup": "^8.x",
+    "typescript": "^5.x",
+    "vitest": "^1.x"
+  }
+}
