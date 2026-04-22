@@ -1,11 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { callReadOnlyFunction } from '@stacks/transactions';
-import {
-  parseBoardCV,
-  parseGameStatusCV,
-  parseWinnerCV,
-  parseTurnCV,
-} from '../src/utils/cv';
+import { parseBoardCV, parseGameStatusCV, parseWinnerCV, parseTurnCV } from '../src/utils/cv';
 import { getFullGameState } from '../src/contract/read';
 import type { ClarityXOConfig } from '../src/types';
 
@@ -18,9 +13,21 @@ describe('parseBoardCV', () => {
   it('should parse board with X, O, and null', () => {
     const mockCV = {
       list: [
-        { list: [{ type: 'some', value: { value: 'X' } }, { type: 'none' }, { type: 'some', value: { value: 'O' } }] },
+        {
+          list: [
+            { type: 'some', value: { value: 'X' } },
+            { type: 'none' },
+            { type: 'some', value: { value: 'O' } },
+          ],
+        },
         { list: [{ type: 'none' }, { type: 'some', value: { value: 'X' } }, { type: 'none' }] },
-        { list: [{ type: 'some', value: { value: 'O' } }, { type: 'none' }, { type: 'some', value: { value: 'X' } }] },
+        {
+          list: [
+            { type: 'some', value: { value: 'O' } },
+            { type: 'none' },
+            { type: 'some', value: { value: 'X' } },
+          ],
+        },
       ],
     };
     const board = parseBoardCV(mockCV as any);
@@ -86,7 +93,8 @@ describe('getFullGameState', () => {
     };
 
     // Mock the callReadOnlyFunction to return mock CVs
-    (callReadOnlyFunction as any).mockResolvedValueOnce({ list: [] }); // board
+    const emptyRow = { list: [{ type: 'none' }, { type: 'none' }, { type: 'none' }] };
+    (callReadOnlyFunction as any).mockResolvedValueOnce({ list: [emptyRow, emptyRow, emptyRow] }); // board
     (callReadOnlyFunction as any).mockResolvedValueOnce({ value: 'active' }); // status
     (callReadOnlyFunction as any).mockResolvedValueOnce({ value: 'player' }); // winner
     (callReadOnlyFunction as any).mockResolvedValueOnce({ value: 'player' }); // turn
