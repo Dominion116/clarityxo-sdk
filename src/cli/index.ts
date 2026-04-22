@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { createRequire } from 'node:module';
 import boardCommand from './commands/board';
 import statusCommand from './commands/status';
 import winnerCommand from './commands/winner';
 import leaderboardCommand from './commands/leaderboard';
 
-const require = createRequire(import.meta.url);
-const packageJson = require('../../package.json');
+const packageJson = { version: '0.1.0' };
 
 const program = new Command();
 
