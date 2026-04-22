@@ -1,4 +1,4 @@
-import { makeContractCall, broadcastTransaction } from '@stacks/transactions';
+import { makeContractCall, broadcastTransaction, uintCV } from '@stacks/transactions';
 import type { ClarityXOConfig } from '../types';
 import { CONTRACT_NAME, CONTRACT_FUNCTIONS } from '../constants';
 import { getStacksNetwork } from '../utils/network';
@@ -22,7 +22,11 @@ export async function startNewGame(config: ClarityXOConfig): Promise<{ txId: str
   return { txId: broadcastResponse.txid };
 }
 
-export async function makeMove(config: ClarityXOConfig, row: 0 | 1 | 2, col: 0 | 1 | 2): Promise<{ txId: string }> {
+export async function makeMove(
+  config: ClarityXOConfig,
+  row: 0 | 1 | 2,
+  col: 0 | 1 | 2
+): Promise<{ txId: string }> {
   if (!config.senderKey || !config.senderAddress) {
     throw new Error('senderKey and senderAddress are required for write operations');
   }
@@ -33,10 +37,7 @@ export async function makeMove(config: ClarityXOConfig, row: 0 | 1 | 2, col: 0 |
     contractAddress: config.contractAddress,
     contractName,
     functionName: CONTRACT_FUNCTIONS.MAKE_MOVE,
-    functionArgs: [
-      { type: 'uint', value: row },
-      { type: 'uint', value: col },
-    ],
+    functionArgs: [uintCV(row), uintCV(col)],
     senderKey: config.senderKey,
     anchorMode: 'any',
   });
