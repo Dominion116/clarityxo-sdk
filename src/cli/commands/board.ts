@@ -8,15 +8,10 @@ const command = new Command('board');
 
 command
   .description('Display the current game board')
-  .option('--contract <address>', 'Contract address (required)')
+  .option('--contract [address]', 'Contract address')
   .option('--network <network>', 'Network (mainnet or testnet)', 'testnet')
   .option('--api <url>', 'Leaderboard API URL')
   .action(async (options) => {
-    if (!options.contract) {
-      console.error(chalk.red('Error: --contract is required'));
-      process.exit(1);
-    }
-
     const config: ClarityXOConfig = {
       network: options.network,
       contractAddress: options.contract,
