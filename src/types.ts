@@ -41,7 +41,7 @@ export interface GameResult {
 
 export interface ClarityXOConfig {
   network: Network;
-  contractAddress: string;
+  contractAddress?: string;     // defaults to deployed contract
   contractName?: string;        // defaults to 'tictactoe'
   leaderboardApiUrl?: string;   // defaults based on network
   senderAddress?: string;       // required for write operations
