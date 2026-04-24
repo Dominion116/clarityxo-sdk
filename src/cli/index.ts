@@ -5,6 +5,7 @@ import boardCommand from './commands/board';
 import statusCommand from './commands/status';
 import winnerCommand from './commands/winner';
 import leaderboardCommand from './commands/leaderboard';
+import moveCommand from './commands/move';
 
 const packageJson = { version: '0.1.0' };
 
@@ -24,5 +25,6 @@ program.addCommand(boardCommand);
 program.addCommand(statusCommand);
 program.addCommand(winnerCommand);
 program.addCommand(leaderboardCommand);
+program.addCommand(moveCommand);
 
 program.parse();
