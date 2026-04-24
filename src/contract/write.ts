@@ -1,6 +1,6 @@
 import { makeContractCall, broadcastTransaction, uintCV } from '@stacks/transactions';
 import type { ClarityXOConfig } from '../types';
-import { CONTRACT_NAME, CONTRACT_FUNCTIONS } from '../constants';
+import { CONTRACT_NAME, CONTRACT_ADDRESS, CONTRACT_FUNCTIONS } from '../constants';
 import { getStacksNetwork } from '../utils/network';
 
 export async function startNewGame(config: ClarityXOConfig): Promise<{ txId: string }> {
@@ -9,9 +9,10 @@ export async function startNewGame(config: ClarityXOConfig): Promise<{ txId: str
   }
   const network = getStacksNetwork(config.network);
   const contractName = config.contractName || CONTRACT_NAME;
+  const contractAddress = config.contractAddress || CONTRACT_ADDRESS;
   const tx = await makeContractCall({
     network,
-    contractAddress: config.contractAddress,
+    contractAddress,
     contractName,
     functionName: CONTRACT_FUNCTIONS.START_NEW_GAME,
     functionArgs: [],
@@ -32,9 +33,10 @@ export async function makeMove(
   }
   const network = getStacksNetwork(config.network);
   const contractName = config.contractName || CONTRACT_NAME;
+  const contractAddress = config.contractAddress || CONTRACT_ADDRESS;
   const tx = await makeContractCall({
     network,
-    contractAddress: config.contractAddress,
+    contractAddress,
     contractName,
     functionName: CONTRACT_FUNCTIONS.MAKE_MOVE,
     functionArgs: [uintCV(row), uintCV(col)],
@@ -51,9 +53,10 @@ export async function resignGame(config: ClarityXOConfig): Promise<{ txId: strin
   }
   const network = getStacksNetwork(config.network);
   const contractName = config.contractName || CONTRACT_NAME;
+  const contractAddress = config.contractAddress || CONTRACT_ADDRESS;
   const tx = await makeContractCall({
     network,
-    contractAddress: config.contractAddress,
+    contractAddress,
     contractName,
     functionName: CONTRACT_FUNCTIONS.RESIGN_GAME,
     functionArgs: [],
