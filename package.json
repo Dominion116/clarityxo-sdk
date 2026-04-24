@@ -33,6 +33,14 @@
   "author": "Dominion <limbotech116@gmail.com>",
   "author": "Dominion <limbotech116@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dominion116/clarityxo-sdk.git"
+  },
+  "homepage": "https://github.com/Dominion116/clarityxo-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/Dominion116/clarityxo-sdk/issues"
+  },
   "dependencies": {
     "@stacks/blockchain-api-client": "^7.x",
     "@stacks/network": "^6.x",
