@@ -57,6 +57,7 @@ These require `senderKey` and `senderAddress` in config.
 - `submitResult(result: GameResult): Promise<void>` - Submit a game result
 - `syncLeaderboard(): Promise<void>` - Sync leaderboard data
 - `healthCheck(): Promise<boolean>` - Check if leaderboard API is healthy
+- `getPlayerStats(playerAddress: string, month?: string): Promise<PlayerStats | null>` - Get statistics for a specific player
 
 ### Types
 
@@ -69,6 +70,7 @@ These require `senderKey` and `senderAddress` in config.
 - `LeaderboardEntry`: { player, wins, losses, draws, points, rank }
 - `LeaderboardMonth`: { month, entries }
 - `GameResult`: { player, outcome, month }
+- `PlayerStats`: { player, wins, losses, draws, points, rank, totalGames, winRate }
 
 ## CLI
 
@@ -129,6 +131,30 @@ Display the leaderboard for a month.
 clarityxo leaderboard --month 2023-10 --contract ST1PQHQKVVA1MGKKKSQCXDTEYXSGHCV66VR89BS1
 ```
 
+#### `move <row> <col>`
+
+Make a move on the board. Requires sender key and address.
+
+```bash
+clarityxo move 1 2 --contract ST1PQHQKVVA1MGKKKSQCXDTEYXSGHCV66VR89BS1 --key <private-key> --address <address>
+```
+
+#### `start`
+
+Start a new game. Requires sender key and address.
+
+```bash
+clarityxo start --contract ST1PQHQKVVA1MGKKKSQCXDTEYXSGHCV66VR89BS1 --key <private-key> --address <address>
+```
+
+#### `resign`
+
+Resign the current game. Requires sender key and address.
+
+```bash
+clarityxo resign --contract ST1PQHQKVVA1MGKKKSQCXDTEYXSGHCV66VR89BS1 --key <private-key> --address <address>
+```
+
 ## Network Configuration
 
 - **Mainnet**: Use 'mainnet' network, mainnet contract addresses
@@ -148,6 +174,18 @@ try {
   console.error('Failed to start game:', error.message);
 }
 ```
+
+## Utility Functions
+
+The SDK includes utility functions for board analysis:
+
+- `checkWin(board, player)` - Check if a player has won
+- `isBoardFull(board)` - Check if the board is full
+- `isDraw(board)` - Check if the game is a draw
+- `getAvailableMoves(board)` - Get list of available moves
+- `getBoardString(board)` - Convert board to string representation
+- `cloneBoard(board)` - Create a deep copy of the board
+- `makeMoveOnBoard(board, row, col, player)` - Make a move and return new board
 
 ## Contributing
 
