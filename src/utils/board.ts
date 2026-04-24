@@ -53,7 +53,7 @@ export function getBoardString(board: Board): string {
 }
 
 export function cloneBoard(board: Board): Board {
-  return board.map(row => [...row]);
+  return board.map(row => [...row]) as Board;
 }
 
 export function makeMoveOnBoard(board: Board, row: number, col: number, player: CellValue): Board {
@@ -62,5 +62,5 @@ export function makeMoveOnBoard(board: Board, row: number, col: number, player: 
   }
   const newBoard = cloneBoard(board);
   newBoard[row][col] = player;
-  return newBoard;
+  return newBoard as Board;
 }
