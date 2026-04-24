@@ -9,7 +9,7 @@ import moveCommand from './commands/move';
 import startCommand from './commands/start';
 import resignCommand from './commands/resign';
 
-const packageJson = { version: '0.1.0' };
+const packageJson = { version: '0.2.0' };
 
 const program = new Command();
 
