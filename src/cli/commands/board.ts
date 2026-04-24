@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { createClient } from '../../client';
 import type { ClarityXOConfig } from '../../types';
+import { validateContractAddress, validateNetwork } from '../../utils/validation';
 
 const command = new Command('board');
 
@@ -12,6 +13,14 @@ command
   .option('--network <network>', 'Network (mainnet or testnet)', 'testnet')
   .option('--api <url>', 'Leaderboard API URL')
   .action(async (options) => {
+    try {
+      validateNetwork(options.network);
+      validateContractAddress(options.contract);
+    } catch (error) {
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
+
     const config: ClarityXOConfig = {
       network: options.network,
       contractAddress: options.contract,

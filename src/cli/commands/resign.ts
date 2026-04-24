@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { createClient } from '../../client';
 import type { ClarityXOConfig } from '../../types';
+import { validateNetwork, validateWriteConfig } from '../../utils/validation';
 
 const command = new Command('resign');
 
@@ -14,8 +15,11 @@ command
   .option('--key <key>', 'Sender private key (required)')
   .option('--address <address>', 'Sender address (required)')
   .action(async (options) => {
-    if (!options.key || !options.address) {
-      console.error(chalk.red('Error: --key and --address are required for resigning games'));
+    try {
+      validateNetwork(options.network);
+      validateWriteConfig(options.key, options.address);
+    } catch (error) {
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
       process.exit(1);
     }
 

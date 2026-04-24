@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { createClient } from '../../client';
 import type { ClarityXOConfig } from '../../types';
+import { validateContractAddress, validateNetwork, validateWriteConfig } from '../../utils/validation';
 
 const command = new Command('move');
 
@@ -16,16 +17,19 @@ command
   .option('--key <key>', 'Sender private key (required)')
   .option('--address <address>', 'Sender address (required)')
   .action(async (row, col, options) => {
-    const rowNum = parseInt(row, 10);
-    const colNum = parseInt(col, 10);
+    try {
+      validateNetwork(options.network);
 
-    if (isNaN(rowNum) || isNaN(colNum) || rowNum < 0 || rowNum > 2 || colNum < 0 || colNum > 2) {
-      console.error(chalk.red('Error: Row and column must be integers between 0 and 2'));
-      process.exit(1);
-    }
+      const rowNum = parseInt(row, 10);
+      const colNum = parseInt(col, 10);
 
-    if (!options.key || !options.address) {
-      console.error(chalk.red('Error: --key and --address are required for making moves'));
+      if (isNaN(rowNum) || isNaN(colNum) || rowNum < 0 || rowNum > 2 || colNum < 0 || colNum > 2) {
+        throw new Error('Row and column must be integers between 0 and 2');
+      }
+
+      validateWriteConfig(options.key, options.address);
+    } catch (error) {
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
       process.exit(1);
     }
 
