@@ -28,6 +28,17 @@ export interface LeaderboardEntry {
   rank: number;
 }
 
+export interface PlayerStats {
+  player: string;
+  wins: number;
+  losses: number;
+  draws: number;
+  points: number;
+  rank: number;
+  totalGames: number;
+  winRate: number;
+}
+
 export interface LeaderboardMonth {
   month: string;  // YYYY-MM
   entries: LeaderboardEntry[];

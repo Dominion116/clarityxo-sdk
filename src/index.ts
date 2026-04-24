@@ -4,4 +4,5 @@ export * from './constants';
 export * from './contract/read';
 export * from './contract/write';
 export * from './leaderboard/api';
+export type { PlayerStats } from './types';
 export { CONTRACT_ADDRESS } from './constants';

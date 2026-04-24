@@ -6,6 +6,7 @@ import type {
   Turn,
   LeaderboardMonth,
   GameResult,
+  PlayerStats,
 } from './types';
 import * as read from './contract/read';
 import * as write from './contract/write';
@@ -67,6 +68,10 @@ export class ClarityXOClient {
 
   healthCheck(): Promise<boolean> {
     return leaderboard.healthCheck(this.config);
+  }
+
+  getPlayerStats(playerAddress: string, month?: string): Promise<PlayerStats | null> {
+    return leaderboard.getPlayerStats(this.config, playerAddress, month);
   }
 }
 

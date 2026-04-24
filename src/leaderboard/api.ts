@@ -1,4 +1,4 @@
-import type { ClarityXOConfig, LeaderboardMonth, GameResult } from '../types';
+import type { ClarityXOConfig, LeaderboardMonth, GameResult, PlayerStats } from '../types';
 import { DEFAULT_LEADERBOARD_API } from '../constants';
 
 function getBaseUrl(config: ClarityXOConfig): string {
@@ -44,4 +44,23 @@ export async function healthCheck(config: ClarityXOConfig): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+export async function getPlayerStats(config: ClarityXOConfig, playerAddress: string, month?: string): Promise<PlayerStats | null> {
+  const currentMonth = month || new Date().toISOString().slice(0, 7);
+  const leaderboard = await getLeaderboard(config, currentMonth);
+
+  const entry = leaderboard.entries.find(e => e.player === playerAddress);
+  if (!entry) {
+    return null;
+  }
+
+  const totalGames = entry.wins + entry.losses + entry.draws;
+  const winRate = totalGames > 0 ? (entry.wins / totalGames) * 100 : 0;
+
+  return {
+    ...entry,
+    totalGames,
+    winRate: Math.round(winRate * 100) / 100, // Round to 2 decimal places
+  };
 }
