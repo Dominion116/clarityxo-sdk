@@ -16,7 +16,7 @@ program
   .version(packageJson.version);
 
 program
-  .option('--contract <address>', 'Contract address')
+  .option('--contract [address]', 'Contract address')
   .option('--network <network>', 'Network (mainnet or testnet)', 'testnet')
   .option('--api <url>', 'Leaderboard API URL');
 
