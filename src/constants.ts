@@ -1,4 +1,5 @@
 export const CONTRACT_NAME = 'tictactoe';
+export const CONTRACT_ADDRESS = 'SP30VGN68PSGVWGNMD0HH2WQMM5T486EK3YGP7Z3Y.clarity-xo-game';
 
 export const MAINNET_API = 'https://api.mainnet.hiro.so';
 export const TESTNET_API = 'https://api.testnet.hiro.so';
