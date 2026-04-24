@@ -41,6 +41,13 @@
   "bugs": {
     "url": "https://github.com/Dominion116/clarityxo-sdk/issues"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@stacks/blockchain-api-client": "^7.x",
     "@stacks/network": "^6.x",
