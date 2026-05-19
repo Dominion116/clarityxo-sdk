@@ -6,6 +6,8 @@ export const TESTNET_API = 'https://api.testnet.hiro.so';
 
 export const DEFAULT_LEADERBOARD_API = 'https://clarityxo.onrender.com';
 
+export const DEFAULT_NETWORK: 'testnet' | 'mainnet' = 'testnet';
+
 export const CONTRACT_FUNCTIONS = {
   START_NEW_GAME: 'start-new-game',
   MAKE_MOVE: 'make-move',
