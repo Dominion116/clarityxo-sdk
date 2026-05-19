@@ -46,4 +46,14 @@ command
     }
   });
 
+// Add an example to the help text to make usage clearer
+command.addHelpText(
+  'after',
+  `
+Examples:
+  clarityxo start --contract <contract-address> --key <private-key> --address <sender-address>
+  clarityxo start --network testnet --key <private-key> --address <sender-address>
+`
+);
+
 export default command;
