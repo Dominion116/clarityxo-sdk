@@ -15,7 +15,7 @@ export type Turn = 'player' | 'ai';
 export interface GameState {
   board: Board;
   status: GameStatus;
-  winner: 'player' | 'ai' | 'draw' | null;
+  winner: Winner;
   currentTurn: Turn;
 }
 
@@ -49,6 +49,8 @@ export interface GameResult {
   outcome: 'win' | 'loss' | 'draw';
   month: string;
 }
+
+export type Winner = 'player' | 'ai' | 'draw' | null;
 
 export interface ClarityXOConfig {
   network: Network;
