@@ -197,6 +197,8 @@ The SDK includes utility functions for board analysis:
 6. Format: `npm run format`
 7. Submit a PR
 
+If you'd like to contribute a bugfix or small improvement, open an issue first with a short description of the change. For larger features, open a discussion or draft PR so we can coordinate before significant design work.
+
 ## License
 
 MIT
